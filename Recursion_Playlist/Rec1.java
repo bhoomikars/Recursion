@@ -82,5 +82,18 @@ public class Rec1 {
         printSubSequences(list, idx + 1, arr);
     }
 
+    public void printSubSequencesOfString(int idx, String str, String out) {
+        if(idx >= str.length()){
+            System.out.println(out);
+            return;
+        }
+        out = out+str.charAt(idx);
+        printSubSequencesOfString(idx+1,str, out);
+
+        out = out.substring(0,out.length()-1);
+        printSubSequencesOfString(idx+1,str, out);
+
+    }
+
 
 }
