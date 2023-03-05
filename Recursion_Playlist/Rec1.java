@@ -1,6 +1,7 @@
 package Recursion_Playlist;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Rec1 {
 
@@ -82,6 +83,24 @@ public class Rec1 {
         printSubSequences(list, idx + 1, arr);
     }
 
+    public void printSubSequencesWhoseSumIsK(ArrayList<Integer> list, int idx, int[] arr, int sum) {
+        if (idx >= arr.length) {
+            int val = list.stream().mapToInt(a -> a).sum();
+//            int val2 = list.stream().reduce(0 ,(a, b)-> a+b);
+            if(val == sum){
+                System.out.println(list);
+            }
+            return;
+        }
+        list.add(arr[idx]);
+        //pick
+        printSubSequencesWhoseSumIsK(list, idx + 1, arr, sum);
+        list.remove(list.size() - 1);
+        //do not pick
+        printSubSequencesWhoseSumIsK(list, idx + 1, arr, sum);
+    }
+
+
     public void printSubSequencesOfString(int idx, String str, String out) {
         if(idx >= str.length()){
             System.out.println(out);
@@ -93,6 +112,29 @@ public class Rec1 {
         out = out.substring(0, out.length()-1);
         printSubSequencesOfString(idx+1, str, out);
 
+    }
+
+    public boolean isSubsequence(String s, String t) {
+
+        ArrayList<String> list = getSubsequence(new ArrayList<>(),t, 0 , "");
+        if(list.contains(s)){
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<String> getSubsequence(ArrayList<String> list, String s, int idx, String out){
+        if(idx >= s.length()){
+            list.add(out);
+            return list;
+        }
+
+        out = out + s.charAt(idx);
+        getSubsequence(list, s, idx+1, out);
+        out = out.substring(0, out.length()-1);
+        getSubsequence(list, s, idx+1, out);
+
+        return list;
     }
 
 
