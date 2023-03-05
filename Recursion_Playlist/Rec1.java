@@ -163,4 +163,68 @@ public class Rec1 {
 
     }
 
+    public List<Integer> sumOfTheSubset(int[] arr, int idx, List<Integer> list, int sum){
+        if(idx >= arr.length){
+            list.add(sum);
+            return list;
+        }
+
+        sumOfTheSubset(arr, idx+1, list, sum+arr[idx]);
+        sumOfTheSubset(arr, idx+1, list, sum);
+
+        return list;
+    }
+
+
+    public List<List<Integer>> subsets(int[] nums) {
+
+        List<List<Integer>> ans = new ArrayList<>();
+        generateSubset(nums, new ArrayList<>(), 0, ans);
+        return ans;
+
+    }
+
+    public void generateSubset(int [] arr, ArrayList<Integer> list, int idx, List<List<Integer>>  ans){
+
+        if(idx >= arr.length){
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        list.add(arr[idx]);
+        generateSubset(arr,list, idx+1, ans);
+        list.remove(list.size()-1);
+        generateSubset(arr,list, idx+1, ans);
+    }
+
+
+    public List<List<Integer>> permute(int[] nums) {
+
+        List<List<Integer>> ans = new ArrayList<>();
+        boolean[] freq = new boolean[nums.length];
+        generatePermutation(nums, new ArrayList<>(),freq, 0, ans);
+        return ans;
+
+    }
+
+
+
+    public void generatePermutation(int[] arr, ArrayList<Integer> ds, boolean[] freq, int idx, List<List<Integer>> ans){
+        if(idx >= arr.length){
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+
+        for(int i =0; i<arr.length ; i++){
+            if(!freq[i]) {
+                freq[i] = true;
+                ds.add(arr[i]);
+                generatePermutation(arr, ds, freq, idx + 1, ans);
+                ds.remove(ds.size() - 1);
+                freq[i] = false;
+            }
+
+        }
+    }
+
 }
