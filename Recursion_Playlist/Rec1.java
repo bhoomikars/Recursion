@@ -87,11 +87,11 @@ public class Rec1 {
             System.out.println(out);
             return;
         }
-        out = out+str.charAt(idx);
-        printSubSequencesOfString(idx+1,str, out);
+        out = out + str.charAt(idx);
+        printSubSequencesOfString(idx+1, str, out);
 
-        out = out.substring(0,out.length()-1);
-        printSubSequencesOfString(idx+1,str, out);
+        out = out.substring(0, out.length()-1);
+        printSubSequencesOfString(idx+1, str, out);
 
     }
 
